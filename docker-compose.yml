@@ -1,0 +1,8 @@
+version: '3'
+services:
+  a:
+    build: ./services/a/
+  b:
+    build: ./services/b/
+  c:
+    build: ./services/c/

@@ -1,0 +1,1 @@
+sudo /bin/docker-compose up --scale a=3 --scale b=2 --scale c=4
