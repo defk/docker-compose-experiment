@@ -6,6 +6,7 @@
  */
 
 const SERVICE_NAME = 'a_service';
+const VERSION_NAME = '1.0.4';
 const SLEEP_MIN = 2500;
 const SLEEP_MAX = 5000;
 
@@ -15,10 +16,11 @@ while (true) {
 
     output(
         vsprintf(
-            '[%s]: Service: %s, sleep: %.3f s',
+            '[%s]: Service: %s [vesrion: %s], sleep: %.3f s',
             [
                 $guid,
                 SERVICE_NAME,
+                VERSION_NAME,
                 ($sleep = sleep_time()) / 1000,
             ]
         )
