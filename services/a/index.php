@@ -27,6 +27,9 @@ while (true) {
     usleep($sleep * 1000);
 }
 
+/**
+ * @return string
+ */
 function getGUID(): string
 {
 
