@@ -6,13 +6,20 @@
  */
 
 const SERVICE_NAME = 'c_service';
-const VERSION_NAME = '1.1.1';
+const VERSION_NAME = '1.0.4';
 const SLEEP_MIN = 2500;
 const SLEEP_MAX = 5000;
+const RANDOM_CRASH_RATE = 50;
+const IS_RANDOM_CRASH = true;
 
 $guid = getGUID();
 
 while (true) {
+
+    if (IS_RANDOM_CRASH) {
+
+        randomCrash();
+    }
 
     output(
         vsprintf(
@@ -21,12 +28,52 @@ while (true) {
                 $guid,
                 SERVICE_NAME,
                 VERSION_NAME,
-                ($sleep = sleep_time()) / 1000,
+                ($sleep = getRandomInt(SLEEP_MIN, SLEEP_MAX)) / 1000,
             ]
         )
     );
 
     usleep($sleep * 1000);
+}
+
+/**
+ * @param int $rate
+ *
+ * @throws Exception
+ */
+function randomCrash(int $rate = RANDOM_CRASH_RATE): void
+{
+
+    $isCrash = true;
+
+    if ($rate < 100) {
+
+        $isCrashExpect = [];
+
+        for ($i = 0; $i < $rate; ++$i) {
+
+            while (true) {
+
+                $value = getRandomInt(0, 100);
+
+                if (!isset($isCrashExpect[$value])) {
+
+                    $isCrashExpect[$value] = $value;
+
+                    break;
+                }
+            }
+        }
+
+        $isCrashActual = getRandomInt(0, 100);
+
+        $isCrash = in_array($isCrashActual, $isCrashExpect);
+    }
+
+    if ($isCrash) {
+
+        throw new Exception('Random crash!');
+    }
 }
 
 /**
@@ -75,7 +122,7 @@ function output(string $message): void
  *
  * @return int
  */
-function sleep_time(int $min = SLEEP_MIN, int $max = SLEEP_MAX): int
+function getRandomInt(int $min, int $max): int
 {
 
     if ($min > $max) {

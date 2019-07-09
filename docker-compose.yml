@@ -2,7 +2,10 @@ version: '3'
 services:
   a:
     build: ./services/a/
+    restart: always
   b:
     build: ./services/b/
+    restart: always
   c:
     build: ./services/c/
+    restart: always
