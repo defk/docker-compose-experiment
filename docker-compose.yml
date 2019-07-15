@@ -1,11 +1,17 @@
 version: '3'
 services:
   a:
-    build: ./services/a/
+    build:
+      context: /tmp/compose-test/services/
+      dockerfile: docker/a/Dockerfile
     restart: always
   b:
-    build: ./services/b/
+    build:
+      context: /tmp/compose-test/services/
+      dockerfile: docker/b/Dockerfile
     restart: always
   c:
-    build: ./services/c/
+    build:
+      context: /tmp/compose-test/services/
+      dockerfile: docker/c/Dockerfile
     restart: always
